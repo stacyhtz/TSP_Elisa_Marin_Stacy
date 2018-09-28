@@ -17,7 +17,7 @@ package tsp;
  * 
  */
 public class TSPSolver {
-// test
+// test 2
 	// -----------------------------
 	// ----- ATTRIBUTS -------------
 	// -----------------------------
