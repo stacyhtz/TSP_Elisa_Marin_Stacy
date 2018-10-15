@@ -83,18 +83,14 @@ public class TSPSolver {
 			listevillenonsolution.add(a);
 		}
 		int compteur=0;
+		while (compteur<this.m_instance.getNbCities())	{
+			int p = Villeplusproche(this.m_solution.getCity(compteur),listevillenonsolution);
+			compteur++;
+			listevillenonsolution.remove(p);
+			this.m_solution.setCityPosition(p, compteur);
+		}	
 		
-		
-				int p = Villeplusproche(this.m_solution.getCity(compteur),listevillenonsolution);
-				compteur++;
-				listevillenonsolution.remove(p);
-				this.m_solution.setCityPosition(p, compteur);
-			
-			
-		
-		
-		
-		
+
 		long startTime = System.currentTimeMillis();
 		long spentTime = 0;
 		do
