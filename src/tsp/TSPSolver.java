@@ -1,5 +1,8 @@
 package tsp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 
  * This class is the place where you should enter your code and from which you can create your own objects.
@@ -72,6 +75,26 @@ public class TSPSolver {
 		m_solution.print(System.err);
 		
 		// Example of a time loop
+		
+
+		this.m_solution.setCityPosition(0, 0);
+		ArrayList<Integer> listevillenonsolution = new ArrayList<>();
+		for (int a=0; a<this.m_instance.getNbCities(); a++) {
+			listevillenonsolution.add(a);
+		}
+		int compteur=0;
+		
+		
+				int p = Villeplusproche(this.m_solution.getCity(compteur),listevillenonsolution);
+				compteur++;
+				listevillenonsolution.remove(p);
+				this.m_solution.setCityPosition(p, compteur);
+			
+			
+		
+		
+		
+		
 		long startTime = System.currentTimeMillis();
 		long spentTime = 0;
 		do
@@ -80,6 +103,27 @@ public class TSPSolver {
 			// Code a loop base on time here
 			spentTime = System.currentTimeMillis() - startTime;
 		}while(spentTime < (m_timeLimit * 1000 - 100) );
+		
+	}
+	
+	public int Villeplusproche(int villeconcernee, ArrayList<Integer> listevillenonsolution) throws Exception {
+		
+		long distancemin=this.m_instance.getDistances(villeconcernee, listevillenonsolution.get(0));
+		int villeplusproche=listevillenonsolution.get(0);
+		
+		for (int a : listevillenonsolution) {
+			long distance = this.m_instance.getDistances(villeconcernee, listevillenonsolution.get(a));
+			if (distancemin>distance) {
+				distancemin=distance;
+				villeplusproche=listevillenonsolution.get(a);
+			}
+		}
+		
+		
+		
+		
+		
+		return villeplusproche;
 		
 	}
 
