@@ -76,20 +76,22 @@ public class TSPSolver {
 		
 		// Example of a time loop
 		
-
 		this.m_solution.setCityPosition(0, 0);
 		ArrayList<Integer> listevillenonsolution = new ArrayList<>();
 		for (int a=0; a<this.m_instance.getNbCities(); a++) {
 			listevillenonsolution.add(a);
 		}
+		System.err.println(listevillenonsolution);
 		int compteur=0;
-		while (compteur<this.m_instance.getNbCities())	{
+		while (listevillenonsolution.size() >0)	{
 			int p = Villeplusproche(this.m_solution.getCity(compteur),listevillenonsolution);
+			//System.err.println(p);
+			listevillenonsolution.remove(new Integer( p));
 			compteur++;
-			listevillenonsolution.remove(p);
 			this.m_solution.setCityPosition(p, compteur);
-		}	
-		
+			//System.err.println(listevillenonsolution);
+					}	
+		this.m_solution.setCityPosition(0, compteur);
 
 		long startTime = System.currentTimeMillis();
 		long spentTime = 0;
@@ -108,16 +110,12 @@ public class TSPSolver {
 		int villeplusproche=listevillenonsolution.get(0);
 		
 		for (int a : listevillenonsolution) {
-			long distance = this.m_instance.getDistances(villeconcernee, listevillenonsolution.get(a));
-			if (distancemin>distance) {
+			long distance = this.m_instance.getDistances(villeconcernee, a);
+			if (distance != 0 && distancemin>distance) {
 				distancemin=distance;
-				villeplusproche=listevillenonsolution.get(a);
+				villeplusproche=(a);
 			}
 		}
-		
-		
-		
-		
 		
 		return villeplusproche;
 		
