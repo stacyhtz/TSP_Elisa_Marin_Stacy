@@ -76,7 +76,7 @@ public class TSPSolver {
 		
 		// Example of a time loop
 		
-		this.m_solution.setCityPosition(0, 0);
+		//this.m_solution.setCityPosition(0, 0);
 		ArrayList<Integer> listevillenonsolution = new ArrayList<>();
 		for (int a=0; a<this.m_instance.getNbCities(); a++) {
 			listevillenonsolution.add(a);
