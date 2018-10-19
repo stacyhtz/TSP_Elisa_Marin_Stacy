@@ -3,6 +3,8 @@ package tsp;
 import java.util.ArrayList;
 import java.util.List;
 
+import tsp.heuristic.PlusProcheVoisin;
+
 /**
  * 
  * This class is the place where you should enter your code and from which you can create your own objects.
@@ -72,26 +74,12 @@ public class TSPSolver {
 	 */
 	public void solve() throws Exception
 	{
+		PlusProcheVoisin ppv = new PlusProcheVoisin( this.m_instance,  "plusProcheVoisin");
+		ppv.solve();
+		this.m_solution = ppv.getSolution();
 		m_solution.print(System.err);
 		
 		// Example of a time loop
-		
-		//this.m_solution.setCityPosition(0, 0);
-		ArrayList<Integer> listevillenonsolution = new ArrayList<>();
-		for (int a=1; a<this.m_instance.getNbCities(); a++) {
-			listevillenonsolution.add(a);
-		}
-		//System.err.println(listevillenonsolution);
-		int compteur=0;
-		while (listevillenonsolution.size() >0)	{
-			int p = Villeplusproche(this.m_solution.getCity(compteur),listevillenonsolution);
-			//System.err.println(p);
-			listevillenonsolution.remove(new Integer( p));
-			compteur++;
-			this.m_solution.setCityPosition(p, compteur);
-			//System.err.println(listevillenonsolution);
-					}	
-		this.m_solution.setCityPosition(0, compteur+1);
 
 		long startTime = System.currentTimeMillis();
 		long spentTime = 0;
@@ -101,25 +89,8 @@ public class TSPSolver {
 			// Code a loop base on time here
 			spentTime = System.currentTimeMillis() - startTime;
 		}while(spentTime < (m_timeLimit * 1000 - 100) );
-		
 	}
 	
-	public int Villeplusproche(int villeconcernee, ArrayList<Integer> listevillenonsolution) throws Exception {
-		
-		long distancemin=this.m_instance.getDistances(villeconcernee, listevillenonsolution.get(0));
-		int villeplusproche=listevillenonsolution.get(0);
-		
-		for (int a : listevillenonsolution) {
-			long distance = this.m_instance.getDistances(villeconcernee, a);
-			if (distance != 0 && distancemin>distance) {
-				distancemin=distance;
-				villeplusproche=(a);
-			}
-		}
-		
-		return villeplusproche;
-		
-	}
 
 	// -----------------------------
 	// ----- GETTERS / SETTERS -----
