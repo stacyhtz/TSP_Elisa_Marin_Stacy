@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tsp.heuristic.PlusProcheVoisin;
+import tsp.metaheuristic.Opt2bis;
 
 /**
  * 
@@ -77,7 +78,9 @@ public class TSPSolver {
 		PlusProcheVoisin ppv = new PlusProcheVoisin( this.m_instance,  "plusProcheVoisin");
 		ppv.solve();
 		this.m_solution = ppv.getSolution();
-		m_solution.print(System.err);
+		Opt2bis s = new Opt2bis(this.m_instance, "ppv");
+		s.solve(this.m_solution);
+		
 		
 		// Example of a time loop
 
