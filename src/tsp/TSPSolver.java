@@ -78,8 +78,8 @@ public class TSPSolver {
 		PlusProcheVoisin ppv = new PlusProcheVoisin( this.m_instance,  "plusProcheVoisin");
 		ppv.solve();
 		this.m_solution = ppv.getSolution();
-		Opt2bis s = new Opt2bis(this.m_instance, "ppv");
-		s.solve(this.m_solution);
+		Opt2bis s = new Opt2bis(this.m_instance, "ppv + 2opt");
+		this.m_solution = s.solve(ppv.getSolution());
 		
 		
 		// Example of a time loop
