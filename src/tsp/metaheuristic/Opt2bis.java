@@ -56,20 +56,23 @@ package tsp.metaheuristic;
 	
 			
 			
-			long distanceref = distancetotale(sol);
 			
 			int iterations = 10;
 		
 			while (iterations>0) {
-			
-			for (int posville1 = 1; posville1 < this.m_instance.getNbCities()-2;posville1 ++) {
 				
-				for(int posville2 = posville1+1; posville2< this.m_instance.getNbCities()-2;posville2++) {
+			long distanceref = distancetotale(sol);
+			
+			for (int posville1 = 1; posville1 < this.m_instance.getNbCities(); posville1 ++) {
+				
+				for(int posville2 = posville1+1; posville2 < this.m_instance.getNbCities(); posville2++) {
+					
 					Solution solbis = sol.copy();
 					
 					int compteur = 0;
 					
-					for (int i = posville1; i<= posville2 ;i++) {
+					/* for (int i=posville*/
+					for (int i = posville1; i < posville2 + 1 ;i++) {
 						
 						solbis.setCityPosition(sol.getCity(posville2-compteur), i);
 					
@@ -77,10 +80,11 @@ package tsp.metaheuristic;
 						
 					
 					}
+					
 					long distancemodifiee = distancetotale(solbis);
 					
 					if (distancemodifiee < distanceref) {
-						iterations = 0;
+						iterations = 10;
 						
 						distanceref=distancemodifiee;
 						sol = solbis.copy();
